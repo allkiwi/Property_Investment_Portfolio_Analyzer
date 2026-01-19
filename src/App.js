@@ -162,14 +162,10 @@ export default function InvestmentCalculator() {
 
       const entryFee = contribution * (data.entryFee / 100);
       const netContribution = contribution - entryFee;
-      console.log(
-        `Net Contribution at ${period}: ${netContribution.toFixed(2)}`
-      );
 
       totalInvested += contribution;
       totalEntryFees += entryFee;
       portfolioValue += netContribution;
-      console.log(`Portfolio Value at ${period}: ${portfolioValue.toFixed(2)}`);
 
       // Growth
       if (portfolioValue > 0) {
@@ -302,7 +298,7 @@ export default function InvestmentCalculator() {
             <div className="flex items-center gap-3 mb-2">
               <TrendingUp size={32} />
               <h1 className="text-2xl md:text-3xl font-bold">
-                NZ Investment Planner
+                NZ Stock Investment Calculator
               </h1>
             </div>
             <p className="text-blue-100">
@@ -647,35 +643,64 @@ export default function InvestmentCalculator() {
 
                 return (
                   <>
-                    <div className="grid md:grid-cols-4 gap-4 mb-4">
-                      <div className="bg-white p-4 rounded-lg">
-                        <p className="text-sm text-gray-600">Total Invested</p>
-                        <p className="text-2xl font-bold">
-                          $
-                          {results.totalInvested.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}
-                        </p>
-                      </div>
-                      <div className="bg-white p-4 rounded-lg">
-                        <p className="text-sm text-gray-600">
-                          Portfolio (after tax)
-                        </p>
-                        <p className="text-2xl font-bold text-blue-600">
-                          $
-                          {results.portfolioValue.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}
-                        </p>
-                      </div>
+                <div className="flex flex-wrap gap-4 mb-4">
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Total Invested</p>
+                    <p className="text-2xl font-bold">
+                      $
+                      {results.totalInvested.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                    </p>
+                  </div>
 
-                      <div className="bg-white p-4 rounded-lg">
-                        <p className="text-sm text-gray-600">Net Return (%)</p>
-                        <p className="text-2xl font-bold text-purple-600">
-                          {results.netReturn.toFixed(2)}%
-                        </p>
-                      </div>
-                    </div>
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Portfolio (after tax)</p>
+                    <p className="text-2xl font-bold text-blue-600">
+                      $
+                      {results.portfolioValue.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                    </p>
+                  </div>
+
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Net Return (%)</p>
+                    <p className="text-2xl font-bold text-purple-600">
+                      {results.netReturn.toFixed(2)}%
+                    </p>
+                  </div>
+
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Total Entry Fees</p>
+                    <p className="text-xl font-bold text-orange-600">
+                      $
+                      {results.totalEntryFees.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                    </p>
+                  </div>
+
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Total Mgmt Fees</p>
+                    <p className="text-xl font-bold text-red-600">
+                      $
+                      {results.totalMgmtFees.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                    </p>
+                  </div>
+
+                  <div className="bg-white p-4 rounded-lg w-40">
+                    <p className="text-sm text-gray-600">Estimated Tax</p>
+                    <p className="text-xl font-bold text-purple-600">
+                      $
+                      {results.tax.toLocaleString("en-US", {
+                        maximumFractionDigits: 0,
+                      })}
+                    </p>
+                  </div>
+                </div>
 
                     <div className="bg-green-600 p-6 rounded-lg text-white mb-4">
                       <p className="text-green-100 text-sm">Total Wealth</p>
@@ -687,37 +712,7 @@ export default function InvestmentCalculator() {
                       </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-orange-500">
-                        <p className="text-sm text-gray-600">
-                          Total Entry Fees
-                        </p>
-                        <p className="text-xl font-bold text-orange-600">
-                          $
-                          {results.totalEntryFees.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}
-                        </p>
-                      </div>
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
-                        <p className="text-sm text-gray-600">Total Mgmt Fees</p>
-                        <p className="text-xl font-bold text-red-600">
-                          $
-                          {results.totalMgmtFees.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}
-                        </p>
-                      </div>
-                      <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500">
-                        <p className="text-sm text-gray-600">Estimated Tax</p>
-                        <p className="text-xl font-bold text-purple-600">
-                          $
-                          {results.tax.toLocaleString("en-US", {
-                            maximumFractionDigits: 0,
-                          })}
-                        </p>
-                      </div>
-                    </div>
+
                   </>
                 );
               })()}
